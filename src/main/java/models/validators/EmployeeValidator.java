@@ -9,7 +9,7 @@ import services.EmployeeService;
 
 //従業員インスタンスに設定されている値のバリデーションを行うクラス
 public class EmployeeValidator {
-    
+
      /*
      * 従業員インスタンスの各項目についてバリデーションを行う
      * @param service 呼び出し元Serviceクラスのインスタンス
@@ -21,28 +21,28 @@ public class EmployeeValidator {
     public static List<String> validate(
             EmployeeService service, EmployeeView ev, Boolean codeDuplicateCheckFlag, Boolean passwordCheckFlag){
         List<String> errors = new ArrayList<String>();
-        
+
         //社員番号のチェック
         String codeError = validateCode(service, ev.getCode(), codeDuplicateCheckFlag);
         if(!codeError.equals("")) {
             errors.add(codeError);
         }
-        
+
         //氏名のチェック
         String nameError = validateName(ev.getName());
         if(!nameError.equals("")) {
             errors.add(nameError);
         }
-        
+
         //パスワードのチェック
         String passError = validateName(ev.getName());
         if(!passError.equals("")) {
             errors.add(passError);
         }
-        
+
         return errors;
     }
-    
+
      /*
      * 社員番号の入力チェックを行い、エラーメッセージを返却
      * @param service EmployeeServiceのインスタンス
@@ -55,21 +55,21 @@ public class EmployeeValidator {
         if(code == null || code.equals("")) {
             return MessageConst.E_NOEMP_CODE.getMessage();
         }
-        
+
         if(codeDuplicateCheckFlag) {
             //社員番号の重複チェックを実施
             long employeesCount = isDuplicateEmployee(service, code);
-            
+
             //同一社員番号が既に登録されている場合はエラーメッセージを返却
             if(employeesCount > 0) {
                 return MessageConst.E_EMP_CODE_EXIST.getMessage();
             }
         }
-        
+
         //エラーが無い場合は空文字を返却
         return "";
     }
-    
+
      /*
      * @param service EmployeeServiceのインスタンス
      * @param code 社員番号
@@ -79,7 +79,7 @@ public class EmployeeValidator {
         long employeesCount = service.countByCode(code);
         return employeesCount;
     }
-    
+
      /*
      * 氏名に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
      * @param name 氏名
@@ -89,11 +89,11 @@ public class EmployeeValidator {
         if(name == null || name.equals("")) {
             return MessageConst.E_NONAME.getMessage();
         }
-        
+
         //入力値がある場合は空文字を返却
         return "";
     }
-    
+
      /*
      * パスワードの入力チェックを行い、エラーメッセージを返却
      * @param password パスワード
@@ -105,7 +105,7 @@ public class EmployeeValidator {
         if(passwordCheckFlag && (password == null || password.equals(""))) {
             return MessageConst.E_NOPASSWORD.getMessage();
         }
-        
+
         //エラーが無い場合は空文字を返却
         return "";
     }
