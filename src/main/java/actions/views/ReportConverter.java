@@ -1,5 +1,8 @@
 package actions.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Report;
 
 //日報データのDTOモデル⇔Viewモデルの変換を行うクラス
@@ -38,6 +41,21 @@ public class ReportConverter {
             r.getContent(),
             r.getCreatedAt(),
             r.getUpdatedAt());
+    }
+
+     /*
+     * DTOモデルのリストからViewモデルのリストを作成する
+     * @param list DTOモデルのリスト
+     * @return Viewモデルのリスト
+     */
+    public static List<ReportView> toViewList(List<Report> list){
+        List<ReportView> evs = new ArrayList<>();
+
+        for(Report r : list) {
+            evs.add(toView(r));
+        }
+
+        return evs;
     }
 
      /*
