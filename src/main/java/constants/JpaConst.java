@@ -38,6 +38,14 @@ public interface JpaConst {
     String REP_COL_CREATED_AT = "created_at"; //登録日時
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
+    //出退勤時間テーブル
+    String TABLE_WORK = "works";
+    //出退勤管理テーブルカラム
+    String WORK_COL_ID = "id"; //id
+    String WORK_COL_NAME = "name"; //氏名
+    String WORK_COL_ATTENDANCE_AT = "attendance_at"; //出勤時間
+    String WORK_COL_LEAVING_AT = "leaving_at"; //退勤時間
+
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
@@ -72,4 +80,10 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
+    //全ての出退勤記録をidの降順に取得する
+    String Q_WORK_GET_ALL = ENTITY_EMP + ".getAlls"; //name
+    String Q_WORK_GET_ALL_DEF = "SELECT e FROM Work AS e ORDER BY e.id DESC"; //query
+    //指定した従業員が打刻した出退勤記録を全件idの降順で取得する
+    String Q_WORK_GET_ALL_MINE = ENTITY_REP + ".getAllsMine";
+    String Q_WORK_GET_ALL_MINE_DEF = "SELECT r FROM Work AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY r.id DESC";
     }
