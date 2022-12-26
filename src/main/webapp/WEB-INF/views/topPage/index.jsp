@@ -39,7 +39,7 @@
                 </c:forEach>
             </tbody>
         </table>
-        
+
         <div id="pagination">
             (全 ${reports_count} 件)<br/>
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / maxRow) + 1}" step="1">
@@ -54,8 +54,6 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
-        <button type="submit">出勤</button>
-        <button type="submit">退勤</button>
         <br/><br/>
     </c:param>
 </c:import>

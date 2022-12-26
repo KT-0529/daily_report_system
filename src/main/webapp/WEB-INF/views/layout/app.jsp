@@ -9,6 +9,7 @@
 <c:set var="actWork" value="${ForwardConst.ACT_WORK.getValue()}"/>
 <c:set var="actAuth" value="${ForwardConst.ACT_AUTH.getValue()}"/>
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}"/>
+<c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}"/>
 <c:set var="commOut" value="${ForwardConst.CMD_LOGOUT.getValue()}"/>
 
 <!DOCTYPE html>

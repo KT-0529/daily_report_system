@@ -37,7 +37,11 @@ public enum ForwardConst {
     FW_REP_INDEX("reports/index"),
     FW_REP_SHOW("reports/show"),
     FW_REP_NEW("reports/new"),
-    FW_REP_EDIT("reports/edit");
+    FW_REP_EDIT("reports/edit"),
+    FW_WORK_INDEX("works/index"),
+    FW_WORK_SHOW("works/show"),
+    FW_WORK_NEW("works/new"),
+    FW_WORK_EDIT("works/edit");
 
     //文字列
     private final String text;

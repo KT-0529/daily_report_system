@@ -26,6 +26,8 @@ public interface JpaConst {
     int ROLE_GENERAL = 0; //管理者権限OFF(一般)
     int EMP_DEL_TRUE = 1; //削除フラグON(削除済み)
     int EMP_DEL_FALSE = 0; //削除フラグOFF(現役)
+    int WORK_DEL_TRUE = 1; //削除フラグON
+    int WORK_DEL_FALSE = 0; //削除フラグOFF
 
     //日報テーブル
     String TABLE_REP = "reports"; //テーブル名
@@ -42,18 +44,22 @@ public interface JpaConst {
     String TABLE_WORK = "works";
     //出退勤管理テーブルカラム
     String WORK_COL_ID = "id"; //id
-    String WORK_COL_NAME = "name"; //氏名
+    String WORK_COL_EMP = "employee_id"; //打刻した従業員のid
+    String WORK_COL_WORK_DATE = "work_date"; //いつの日報かを示す日付
     String WORK_COL_ATTENDANCE_AT = "attendance_at"; //出勤時間
     String WORK_COL_LEAVING_AT = "leaving_at"; //退勤時間
+    String WORK_COL_DELETE_FLAG = "delete_flag"; //削除フラグ
 
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
+    String ENTITY_WORK = "work"; //出退勤
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_EMPLOYEE = "employee"; //従業員
+    String JPQL_PARM_WORKDATE = "workDate"; //出勤日
 
     //NamedQueryのnameとquery
     //全ての従業員をidの降順に取得する
@@ -81,9 +87,18 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
     //全ての出退勤記録をidの降順に取得する
-    String Q_WORK_GET_ALL = ENTITY_EMP + ".getAlls"; //name
-    String Q_WORK_GET_ALL_DEF = "SELECT e FROM Work AS e ORDER BY e.id DESC"; //query
-    //指定した従業員が打刻した出退勤記録を全件idの降順で取得する
-    String Q_WORK_GET_ALL_MINE = ENTITY_REP + ".getAllsMine";
+    String Q_WORK_GET_ALL = ENTITY_WORK + ".getAlls";
+    String Q_WORK_GET_ALL_DEF = "SELECT r FROM Work AS r ORDER BY r.id DESC";
+    //全ての出退勤記録の件数を取得する
+    String Q_WORK_COUNT = ENTITY_WORK + ".count";
+    String Q_WORK_COUNT_DEF = "SELECT COUNT(r) FROM Work AS r";
+    //指定した従業員の出退勤記録を全件idの降順で取得する
+    String Q_WORK_GET_ALL_MINE = ENTITY_WORK + ".getAllsMine";
     String Q_WORK_GET_ALL_MINE_DEF = "SELECT r FROM Work AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY r.id DESC";
-    }
+    //指定した従業員が作成した出退勤記録の件数を取得する
+    String Q_WORK_COUNT_ALL_MINE = ENTITY_REP + ".countAllsMine";
+    String Q_WORK_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Work AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
+    //指定した従業員が打刻した件数を取得する
+    String Q_WORK_COUNT_REGISTERED_BY_EMPLOYEE = ENTITY_EMP + ".countRegisteredByEmployee";
+    String Q_WORK_COUNT_REGISTERED_BY_EMPLOYEE_DEF = "SELECT COUNT(e) FROM Work AS e WHERE e.employee = :" + JPQL_PARM_EMPLOYEE + " AND e.workDate = :" + JPQL_PARM_WORKDATE;
+}

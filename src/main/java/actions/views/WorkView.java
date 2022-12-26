@@ -1,6 +1,6 @@
 package actions.views;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,25 +15,24 @@ import lombok.Setter;
 @Setter //全てのクラスフィールドについてsetterを自動生成する(Lombok)
 @NoArgsConstructor //引数なしコンストラクタを自動生成する(Lombok)
 @AllArgsConstructor //全てのクラスフィールドを引数にもつ引数ありコンストラクタを自動生成する(Lombok)
+
 public class WorkView {
 
-     /*
-     * id
-     */
+    //id
     private Integer id;
 
-     /*
-     * 氏名
-     */
-    private String name;
+    //氏名
+    private EmployeeView employee;
 
-     /*
-     *出勤日時
-     */
-    private LocalDateTime attendanceAt;
+    //出勤日
+    private LocalDate workDate;
 
-     /*
-     * 退勤日時
-     */
-    private LocalDateTime leavingAt;
+    //出勤日時
+    private String attendanceAt;
+
+    //退勤日時
+    private String leavingAt;
+
+    //削除フラグ
+    private Integer deleteFlag;
 }
